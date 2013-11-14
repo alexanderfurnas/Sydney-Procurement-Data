@@ -7,59 +7,35 @@ import subprocess
 from time import sleep
 import glob
 
-def write_data(data): #This is used for two different writing functions. Make sure to change the file name and fieldnames
-    ordered_fieldnames =  ["lobbyist", "year", "years_active", "name", "gov_pos_dum", "gov_pos_name", "member_of_cong", "cand_id", "reg_is_firm", "value", "log_value","shannon_entropy", "avg_value", "all_shannon_entropy"]
+def write_data(data, outputpath): #This is used for two different writing functions. Make sure to change the file name and fieldnames
+    ordered_fieldnames =  ["Title",	"Contract Type","Tender Number","Winning Bidder","Winning Bidder Address",	"Related affiliate corp","Date Effective","Duration",	"Contract Description",	"Estimated Value",	"Payment Variation Provisions",	"Renegotiation Provisions",	"Proccess/ Assessment Description"]
 
-    if os.path.exists("/Users/sunlight/Documents/Sydney Contracts Project/Sydney_Contracts_2013_Bulk.csv"):
-        with open("/Users/sunlight/Documents/Sydney Contracts Project/Sydney_Contracts_2013_Bulk.csv", "a") as datatest:
+    if os.path.exists(outputpath):
+        with open(outputpath, "a") as datatest:
     #csv.register_dialect("custom", delimiter="", skipinitialspace=True)
             writer = csv.writer(datatest, dialect="excel")
             try:
-                writer.writerow([s.encode("utf-8") for s in data])
+                writer.writerow(data)
             except UnicodeEncodeError:
                 print userdataset
                 pass
     else:
-        with open("/Users/sunlight/Documents/Sydney Contracts Project/Sydney_Contracts_2013_Bulk.csv", "w") as datatest:
+        with open(outputpath, "w") as datatest:
         #csv.register_dialect("custom", delimiter="", skipinitialspace=True)
             csv.DictWriter(datatest, dialect="excel", fieldnames=ordered_fieldnames).writeheader()
             writer = csv.writer(datatest, dialect="excel")
             try:
-                writer.writerow([s.encode("utf-8") for s in data])
+                writer.writerow(data)
             except UnicodeEncodeError:
                 print i
                 pass
-
-# 
-# 
-# def format_url(path, **params):
-#     # params.update({'key': settings.OPEN_CONGRESS_API_KEY})
-#     params.update({'format': 'json'})
-# 
-#     return '?'.join([path, urllib.urlencode(params)])
-    
-# def get_url_json( path):
-#     try:
-#         fp = urllib2.urlopen(path)
-#         return json.loads(fp.read())
-#     except urllib2.HTTPError, e:
-#         if e.code == 404:
-#             raise Http404
-#         else:
-#             #retry once
-#             try:
-#                 fp = urllib2.urlopen(path)
-#                 return json.loads(fp.read())
-#             except urllib2.HTTPError, e:
-#                 raise e
-#         
+   
 if __name__=='__main__':
-    input_dir = "/Users/sunlight/Documents/Sydney Contracts Project/Sydney Contract PDFs"
-    output_dir = "/Users/sunlight/Documents/Sydney Contracts Project/Sydney Contract txts"
+    input_dir = "/Users/sunlight/Documents/Sydney-proc/Sydney Contract PDFs"
+    output_path = "/Users/sunlight/Documents/Sydney-proc/Sydney_Contracts_2013_Bulk.csv"
     
     for filename in os.listdir(input_dir):
         filepath = input_dir + "/" + filename
-        outpath = output_dir +"/"+filename
         subprocess.call(['pdftotext','-nopgbrk',"-layout", filepath]) 
     os.chdir(input_dir)
     for files in glob.glob("*.txt"):
@@ -214,4 +190,4 @@ if __name__=='__main__':
                 results = "; ".join(multiple_line_field)
             results_dict[field] = results
         data = (contract_type,contract_type_dum,results_dict["one"],results_dict["name"],results_dict["address"],results_dict["three"],results_dict["date"],results_dict["duration"],results_dict["five"],results_dict["six"],results_dict["seven"],results_dict["eight"],results_dict["nine"],results_dict["ten"],results_dict["eleven"],results_dict["twelve"],results_dict["thirteen"],results_dict["fourteen"],results_dict["fifteen"],results_dict["sixteen"],results_dict["seventeen"],results_dict["eighteen"])
-        write_data(data)
+        write_data(data, output_path)
