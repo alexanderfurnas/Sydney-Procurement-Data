@@ -31,8 +31,8 @@ def write_data(data, outputpath): #This is used for two different writing functi
                 pass
    
 if __name__=='__main__':
-    input_dir = "/Users/sunlight/Documents/Sydney-proc/Sydney Contract PDFs"
-    output_path = "/Users/sunlight/Documents/Sydney-proc/Sydney_Contracts_2013_Bulk.csv"
+    input_dir = "Sydney Contract PDFs"
+    output_path = "Sydney_Contracts_2013_Bulk.csv"
     
     for filename in os.listdir(input_dir):
         filepath = input_dir + "/" + filename

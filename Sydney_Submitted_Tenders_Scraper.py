@@ -9,8 +9,8 @@ import dateutil.parser as dparser
 def write_data(data): #This is used for two different writing functions. Make sure to change the file name and fieldnames
     ordered_fieldnames =  ["type", "number", "name", "title", "bidder", "date", "committee_mem1", "committee_mem2", "committee_mem3"]
 
-    if os.path.exists("/Users/sunlight/Documents/Sydney Contracts Project/Sydney_Bidders_Bulk.csv"):
-        with open("/Users/sunlight/Documents/Sydney Contracts Project/Sydney_Bidders_Bulk.csv", "a") as datatest:
+    if os.path.exists("Sydney_Bidders_Bulk.csv"):
+        with open("Sydney_Bidders_Bulk.csv", "a") as datatest:
     #csv.register_dialect("custom", delimiter="", skipinitialspace=True)
             writer = csv.writer(datatest, dialect="excel")
             try:
@@ -19,7 +19,7 @@ def write_data(data): #This is used for two different writing functions. Make su
                 print userdataset
                 pass
     else:
-        with open("/Users/sunlight/Documents/Sydney Contracts Project/Sydney_Bidders_Bulk.csv", "w") as datatest:
+        with open("Sydney_Bidders_Bulk.csv", "w") as datatest:
         #csv.register_dialect("custom", delimiter="", skipinitialspace=True)
             csv.DictWriter(datatest, dialect="excel", fieldnames=ordered_fieldnames).writeheader()
             writer = csv.writer(datatest, dialect="excel")
