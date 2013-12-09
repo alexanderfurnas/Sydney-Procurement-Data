@@ -8,7 +8,7 @@ from time import sleep
 import glob
 
 def write_data(data, outputpath): #This is used for two different writing functions. Make sure to change the file name and fieldnames
-    ordered_fieldnames =  ["Title",	"Contract Type","Tender Number","Winning Bidder","Winning Bidder Address",	"Related affiliate corp","Date Effective","Duration",	"Contract Description",	"Estimated Value",	"Payment Variation Provisions",	"Renegotiation Provisions",	"Proccess/ Assessment Description"]
+    ordered_fieldnames =  ["Title",	"Contract Type","Tender Number","Winning Bidder","Winning Bidder Address",	"Related affiliate corp","Date Effective","Duration",	"Contract Description",	"Estimated Value",	"Payment Variation Provisions",	"Renegotiation Provisions",	"Process/ Assessment Description"]
 
     if os.path.exists(outputpath):
         with open(outputpath, "a") as datatest:
